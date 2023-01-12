@@ -21,7 +21,7 @@ public class CreateEmployeeRequest {
     @NotNull
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     @PositiveOrZero
-    private Integer salary;
+    private Double salary;
 
     private Currency currency = Currency.USD;
 
@@ -35,7 +35,6 @@ public class CreateEmployeeRequest {
     private String subDepartment;
 
     @JsonProperty("on_contract")
-    @NotBlank
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean onContract = false;
 }

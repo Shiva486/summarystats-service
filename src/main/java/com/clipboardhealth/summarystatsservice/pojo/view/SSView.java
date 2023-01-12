@@ -15,7 +15,7 @@ public class SSView {
 
     private Double mean;
 
-    private Integer min;
+    private Double min;
 
-    private Integer max;
+    private Double max;
 }

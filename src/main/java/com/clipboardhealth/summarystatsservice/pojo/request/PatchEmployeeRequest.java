@@ -21,7 +21,7 @@ public class PatchEmployeeRequest {
     private String name;
 
     @PositiveOrZero
-    private Integer salary;
+    private Double salary;
 
     private String department;
 

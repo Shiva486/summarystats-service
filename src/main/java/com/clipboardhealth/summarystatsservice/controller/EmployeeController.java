@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/employee", consumes = "application/json", produces = "application/json")
@@ -79,6 +80,16 @@ public class EmployeeController extends AbstractController {
         return getSuccessResponse(employeeViewList);
     }
 
+    @RequestMapping(value = "/SS", method = RequestMethod.GET)
+    @Timed
+    @Operation(description = "Get summary statistics for all employees",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
+            responses = @ApiResponse(content = @Content(schema = @Schema(implementation = SSView.class))))
+    public Response<?> getSS() {
+        SSView ssView = employeeService.getSSByFilter(null, null, null, null, null);
+        return getSuccessResponse(ssView);
+    }
+
     @RequestMapping(value = "/onContractSS", method = RequestMethod.GET)
     @Timed
     @Operation(description = "Get summary statistics for on_contract=true employees",
@@ -87,5 +98,25 @@ public class EmployeeController extends AbstractController {
     public Response<?> getOnContractSS() {
         SSView ssView = employeeService.getSSByFilter(null, null, null, null, true);
         return getSuccessResponse(ssView);
+    }
+
+    @RequestMapping(value = "/departmentWiseSS", method = RequestMethod.GET)
+    @Timed
+    @Operation(description = "Get summary statistics for all employees group by department",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
+            responses = @ApiResponse(content = @Content(schema = @Schema(implementation = SSView.class))))
+    public Response<?> getDepartmentWiseSS() {
+        Map<String, SSView> departmentWiseSSMap = employeeService.getSSByFilterGroupByDepartment(null, null, null, null, null);
+        return getSuccessResponse(departmentWiseSSMap);
+    }
+
+    @RequestMapping(value = "/subDepartmentWiseSS", method = RequestMethod.GET)
+    @Timed
+    @Operation(description = "Get summary statistics for all employees group by department, sub_department",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
+            responses = @ApiResponse(content = @Content(schema = @Schema(implementation = SSView.class))))
+    public Response<?> getSubDepartmentWiseSS() {
+        Map<String, Map<String, SSView>> subDepartmentWiseSSMap = employeeService.getSSByFilterGroupBySubDepartment(null, null, null, null, null);
+        return getSuccessResponse(subDepartmentWiseSSMap);
     }
 }

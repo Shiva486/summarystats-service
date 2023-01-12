@@ -39,7 +39,7 @@ public class Employee {
     private String name;
 
     @Column(name = "salary", nullable = false)
-    private Integer salary;
+    private Double salary;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "currency_code", nullable = false)

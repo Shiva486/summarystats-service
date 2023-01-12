@@ -22,7 +22,7 @@ public class EmployeeView {
 
     private String name;
 
-    private Integer salary;
+    private Double salary;
 
     private Currency currency;
 
