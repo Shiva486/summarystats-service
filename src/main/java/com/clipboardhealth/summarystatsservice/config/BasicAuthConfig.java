@@ -17,6 +17,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class BasicAuthConfig
 {
+    private static final String[] AUTH_WHITELIST = {
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/h2-console**"
+    };
+
     private final AppBasicAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
@@ -26,8 +39,10 @@ public class BasicAuthConfig
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-            .anyRequest()
+        http.authorizeRequests()
+            .antMatchers(AUTH_WHITELIST)
+            .permitAll()
+            .antMatchers("/**")
             .authenticated()
             .and()
             .httpBasic()
