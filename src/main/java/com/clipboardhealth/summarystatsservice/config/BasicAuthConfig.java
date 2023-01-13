@@ -42,11 +42,16 @@ public class BasicAuthConfig
         http.authorizeRequests()
             .antMatchers(AUTH_WHITELIST)
             .permitAll()
-            .antMatchers("/**")
+            .antMatchers("/employee/**")
+            .hasAuthority("USER_ROLE")
+            .anyRequest()
             .authenticated()
             .and()
             .httpBasic()
-            .authenticationEntryPoint(authenticationEntryPoint);
+            .authenticationEntryPoint(authenticationEntryPoint)
+            .and()
+            .csrf()
+            .disable();
         return http.build();
     }
 
@@ -56,6 +61,7 @@ public class BasicAuthConfig
                 .withUsername("ssuser")
                 .password(passwordEncoder().encode("ss@Pass1"))
                 .roles("USER_ROLE")
+                .authorities("USER_ROLE")
                 .build();
         return new InMemoryUserDetailsManager(user);
     }
