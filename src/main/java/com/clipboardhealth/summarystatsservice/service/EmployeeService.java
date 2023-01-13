@@ -96,6 +96,7 @@ public class EmployeeService {
         return employeeViewList;
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public SSView getSSByFilter(List<Long> ids, List<String> names, List<String> departments,
                                 List<String> subDepartments, Boolean onContract) {
         JPAQuery<Employee> employeeJpaQuery = new JPAQuery<>(entityManager);
@@ -113,6 +114,7 @@ public class EmployeeService {
                      .build();
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public Map<String, SSView> getSSByFilterGroupByDepartment(List<Long> ids, List<String> names, List<String> departments,
                                                               List<String> subDepartments, Boolean onContract) {
         JPAQuery<Employee> employeeJpaQuery = new JPAQuery<>(entityManager);
@@ -134,6 +136,7 @@ public class EmployeeService {
         return departmentWiseSSMap;
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public Map<String, Map<String, SSView>> getSSByFilterGroupBySubDepartment(List<Long> ids, List<String> names, List<String> departments,
                                                                               List<String> subDepartments, Boolean onContract) {
         JPAQuery<Employee> employeeJpaQuery = new JPAQuery<>(entityManager);
