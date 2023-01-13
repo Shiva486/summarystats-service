@@ -2,15 +2,19 @@
 
 > **user**: ssuser, **password**: ss@Pass1
 
-- To run application from command line, go to the project root and run the following commands:
+- To run application with docker, go to the project root and run the following commands:
+  - docker build --tag=summarystats-server:latest .
+  - docker-compose up
+- To run application without docker, go to the project root and run the following commands:
     - mvn clean
     - mvn compile
     - mvn spring-boot:run
 - To run tests:
   - mvn test
+- Application port: 8600
 - [Problem Statement](https://docs.google.com/document/d/1VLeLbYSCdOmZzjNmKIcpguEtABO8aeQSmmnq0LOSmC8/edit)
-- [Swagger Link](http://localhost:8500/swagger-ui.html) (for documentation, api contracts and api description)
-- [H2 Console](http://localhost:8500/h2-console)
+- [Swagger Link](http://localhost:8600/swagger-ui.html) (for documentation, api contracts and api description)
+- [H2 Console](http://localhost:8600/h2-console)
 - Environment variables with default values:
 ```properties
 server.port=8600
