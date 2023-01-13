@@ -1,19 +1,23 @@
 # summarystats-service
 
+> **user**: ssuser, **password**: ss@Pass1
+
 - To run application from command line, go to the project root and run the following commands:
     - mvn clean
     - mvn compile
     - mvn spring-boot:run
+- To run tests:
+  - mvn test
 - [Problem Statement](https://docs.google.com/document/d/1VLeLbYSCdOmZzjNmKIcpguEtABO8aeQSmmnq0LOSmC8/edit)
-- [Swagger Link](http://localhost:8500/swagger-ui.html) (for documentation)
+- [Swagger Link](http://localhost:8500/swagger-ui.html) (for documentation, api contracts and api description)
 - [H2 Console](http://localhost:8500/h2-console)
 - Environment variables with default values:
 ```properties
-server.port=8500
+server.port=8600
 spring.application.name=summarystats-service
 logging.level.com.clipboardhealth.summarystatsservice=INFO
 
-spring.datasource.url=jdbc:h2:mem:rilldb
+spring.datasource.url=jdbc:h2:mem:clipboarddb
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
 spring.datasource.password=password
@@ -33,3 +37,12 @@ server.tomcat.max-connections=10000
 server.tomcat.threads.max=200
 server.tomcat.threads.min-spare=80
 ```
+<br>
+
+#### Good coding practices followed in this application
+
+- Have structured the code in a readable manner, separating business logic, controllers, services etc
+- Have used querydsl for generating summary statistics instead of native sql or criteria api. Both have few limitations in terms of adding new constraints to the existing queries and type safety
+- Have defined interfaces, abstract classes etc. wherever it was necessary
+- Have defined currency as enum instead of String for type safety
+- Have implemented a global exception handler for better error messages
