@@ -1,0 +1,10 @@
+version: '3'
+services:
+  summarystats-server:
+    container_name: summarystats-server
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: summarystats-server:latest
+    ports:
+      - 18600:8600
